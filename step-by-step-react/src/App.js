@@ -1,27 +1,50 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Component1 from './2_Props/Component1'; 
-import Component2 from './2_Props/Component2'
-import State1Number from './3_State/State1Number'
-import State2String from './3_State/State2String';
-import State3Array from './3_State/State3Array';
-import State4Object from './3_State/State4Object'
+import Container from 'react-bootstrap/Container';
+import {useState} from 'react'
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import HomePage from './Pages/HomePage';
+import AboutPage from './Pages/AboutPage';
+import LoginPage from './Pages/LoginPage';
+import ServicesPage from './Pages/ServicesPage';
+import ProtectedRoute from "./ProtectedRoute";
+
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
   return (
-    <>
-      {/* <Component1 studentName="Dustin" studentAge="32" studentCourse="React" />
-      <Component1 studentName="Kelvin" studentAge="29" studentCourse="Html" />
-      <Component1 studentName="Milies" studentAge="28" studentCourse="css"/>
+    <BrowserRouter>
 
-      <Component2 studentName="Dustin" studentAge="32" studentCourse="React" />
-      <Component2 studentName="Kelvin" studentAge="29" studentCourse="Html" /> */}
+  <Navbar expand="lg" className="bg-body-tertiary">
+        <Container>
+          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/about">About Us</Nav.Link>
+              <Nav.Link href="/service">Services</Nav.Link>
+              <Nav.Link href="/login">Login</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
-      {/* <State1Number /> */}
-      {/* <State2String /> */}
-      {/* <State3Array /> */}
-      <State4Object />
-    </>
+
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route
+          path="/service"
+          element={ServicesPage} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
